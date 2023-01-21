@@ -51,6 +51,8 @@ public class Cab{
     }
 
     public Cab() {
+        this.perKmRate=10;
+        this.available=true;
     }
 
     public Cab(int id, int perKmRate, boolean available, Driver driver) {
