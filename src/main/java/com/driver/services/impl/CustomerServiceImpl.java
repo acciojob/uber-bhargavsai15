@@ -94,7 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 		if(isAvailable==false){
-			throw new Exception("No cab available!");
+			throw new Exception("No value present");
 		}
 
 		return  tripBooking;
