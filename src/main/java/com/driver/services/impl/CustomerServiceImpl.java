@@ -64,34 +64,36 @@ public class CustomerServiceImpl implements CustomerService {
 		Collections.sort(adminIds);
 		int bill=0;
 		boolean isAvailable=false;
-		try{
-			for(int i=0;i<adminIds.size();i++){
-				Driver driver=driverRepository2.findById(adminIds.get(i)).get();
-				if(driver.getCab().getAvailable()==true){
-					List<TripBooking> driverTripBookingList=driver.getTripBookingList();
-					bill=distanceInKm*driver.getCab().getPerKmRate();
-					tripBooking.setBill(bill);
-					tripBooking.setCustomer(customer);
-					tripBooking.setFromLocation(fromLocation);
-					tripBooking.setToLocation(toLocation);
-					tripBooking.setDistanceInKm(distanceInKm);
-					tripBooking.setStatus(TripStatus.CONFIRMED);
-					tripBooking.setDriver(driver);
 
-					//calculating bill
+		for(int i=0;i<adminIds.size();i++){
+			Driver driver=driverRepository2.findById(adminIds.get(i)).get();
+			if(driver.getCab().getAvailable()==true){
+				List<TripBooking> driverTripBookingList=driver.getTripBookingList();
+				bill=distanceInKm*driver.getCab().getPerKmRate();
+				tripBooking.setBill(bill);
+				tripBooking.setCustomer(customer);
+				tripBooking.setFromLocation(fromLocation);
+				tripBooking.setToLocation(toLocation);
+				tripBooking.setDistanceInKm(distanceInKm);
+				tripBooking.setStatus(TripStatus.CONFIRMED);
+				tripBooking.setDriver(driver);
 
-					customerTripBookingList.add(tripBooking);
-					driverTripBookingList.add(tripBooking);
-					customerRepository2.save(customer);
-					tripBookingRepository2.save(tripBooking);
-					isAvailable=true;
-					driverRepository2.save(driver);
-				}
-				if(isAvailable){
-					break;
-				}
+				//calculating bill
+
+				customerTripBookingList.add(tripBooking);
+				driverTripBookingList.add(tripBooking);
+				customerRepository2.save(customer);
+				tripBookingRepository2.save(tripBooking);
+				isAvailable=true;
+				driverRepository2.save(driver);
 			}
-		}catch (Exception e){
+			if(isAvailable){
+				break;
+			}
+		}
+
+
+		if(isAvailable==false){
 			throw new Exception("No cab available!");
 		}
 
