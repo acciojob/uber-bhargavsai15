@@ -15,11 +15,11 @@ public class Admin{
 
     private String password;
 
-    public int getId() {
+    public int getAdminId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setAdminId(int id) {
         this.id = id;
     }
 
