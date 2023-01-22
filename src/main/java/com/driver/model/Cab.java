@@ -18,6 +18,7 @@ public class Cab{
     @JoinColumn
     private Driver driver;
 
+
     public int getId() {
         return id;
     }

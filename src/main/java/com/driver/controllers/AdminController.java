@@ -3,8 +3,11 @@ package com.driver.controllers;
 import com.driver.model.Admin;
 import com.driver.model.Customer;
 import com.driver.model.Driver;
+import com.driver.repository.CustomerRepository;
 import com.driver.services.AdminService;
 import com.driver.services.impl.AdminServiceImpl;
+import com.driver.services.impl.CustomerServiceImpl;
+import com.driver.services.impl.DriverServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,10 @@ public class AdminController {
 
 	@Autowired
 	AdminServiceImpl adminService;
+	@Autowired
+	CustomerServiceImpl customerService;
+	@Autowired
+	DriverServiceImpl driverService;
 
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerAdmin(@RequestBody Admin admin){
@@ -38,13 +45,13 @@ public class AdminController {
 
 	@GetMapping("/listOfCustomers")
 	public List<Customer> listOfCustomers() {
-		List<Customer> listOfCustomers=adminService.getListOfCustomers();
-		return listOfCustomers;
+		List<Customer> customers=adminService.getListOfCustomers();
+		return customers;
 	}
 
 	@GetMapping("/listOfDrivers")
 	public List<Driver> listOfDrivers() {
-		List<Driver> listOfDrivers=adminService.getListOfDrivers();
+		List<Driver> listOfDrivers=driverService.getListOfDrivers();
 		return listOfDrivers;
 	}
 }

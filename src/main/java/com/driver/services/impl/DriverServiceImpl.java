@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.driver.model.Driver;
 import com.driver.repository.DriverRepository;
 
+import java.util.List;
+
 @Service
 public class DriverServiceImpl implements DriverService {
 
@@ -23,6 +25,7 @@ public class DriverServiceImpl implements DriverService {
 		//Save a driver in the database having given details and a cab with ratePerKm as 10 and availability as True by default.
 		Driver driver=new Driver(mobile,password);
 		Cab cab=new Cab();
+		cab.setDriver(driver);
 		driver.setCab(cab);
 		driverRepository3.save(driver);
 	}
@@ -43,5 +46,9 @@ public class DriverServiceImpl implements DriverService {
 		cab.setAvailable(false);
 		driver.setCab(cab);
 		driverRepository3.save(driver);
+	}
+
+	public List<Driver> getListOfDrivers(){
+		return driverRepository3.findAll();
 	}
 }
