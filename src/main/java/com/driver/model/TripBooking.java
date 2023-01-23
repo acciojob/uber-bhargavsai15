@@ -34,6 +34,13 @@ public class TripBooking {
 
     }
 
+    public TripBooking(String fromLocation, String toLocation, int distanceInKm, TripStatus confirmed) {
+        this.fromLocation=fromLocation;
+        this.toLocation=toLocation;
+        this.distance=distanceInKm;
+        this.tripStatus=confirmed;
+    }
+
     public int getTripBookingId() {
         return tripBookingId;
     }
