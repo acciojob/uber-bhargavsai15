@@ -88,7 +88,6 @@ public class CustomerServiceImpl implements CustomerService {
 //				customerTripBookingList.add(tripBooking);
 //				driverTripBookingList.add(tripBooking);
 				//customerRepository2.save(customer);
-				tripBookingRepository2.save(tripBooking);
 				isAvailable=true;
 				//driverRepository2.save(driver);
 			}
@@ -101,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if(isAvailable==false){
 			throw new Exception("No cab available!");
 		}
-
+		tripBookingRepository2.save(tripBooking);
 		return  tripBooking;
 	}
 
