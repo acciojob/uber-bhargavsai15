@@ -55,12 +55,16 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tripBooking=new TripBooking();
 
 		List<Driver> driverList=driverRepository2.findAll();
+        if(driverList.size()==0){
+            throw new Exception("No cab available!");
+        }
 
 		//Creating List for storing the All the drivers Id
 		List<Integer> adminIds=new ArrayList<>();
 		for(Driver driver:driverList){
 			adminIds.add(driver.getDriverId());
 		}
+
 		Collections.sort(adminIds);
 		int bill=0;
 		boolean isAvailable=false;
@@ -94,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 		if(isAvailable==false){
-			throw new Exception("No value present");
+			throw new Exception("No cab available!");
 		}
 
 		return  tripBooking;
